@@ -1,5 +1,6 @@
 package cn.com.small_design.service.common;
 
+import cn.com.small_design.common.common.UserInfo;
 import cn.com.small_design.controller.base.bean.UserFormBean;
 import cn.com.small_design.dao.dao.UserMapper;
 import cn.com.small_design.dao.dao.pojo.User;
@@ -52,6 +53,6 @@ public class UserDetailService implements UserDetailsService {
 //            SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(code);
 //            authorities.add(simpleGrantedAuthority);
 //        });
-        return new UserFormBean(user,new ArrayList<>());
+        return new UserInfo(user,new ArrayList<>());
     }
 }

@@ -1,8 +1,8 @@
 package cn.com.small_design.controller.filter;
 
+import cn.com.small_design.common.common.UserInfo;
 import cn.com.small_design.common.utils.JwtUtils;
 import cn.com.small_design.common.utils.RedisUtils;
-import cn.com.small_design.controller.base.bean.UserFormBean;
 import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +54,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String userId = claims.getId();
 
-        UserFormBean user = redisUtils.getCacheObject("login:" + userId);
+        UserInfo user = redisUtils.getCacheObject("login:" + userId);
 
         //验证是否存在登录用户
         if(Objects.isNull(user)){

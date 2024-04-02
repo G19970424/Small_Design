@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.small_design.dao.dao.UserMapper">
+
+    <resultMap id="BaseResultMap" type="cn.com.small_design.dao.dao.pojo.User">
+        <id property="id" column="F_ID" jdbcType="VARCHAR"/>
+        <result property="loginName" column="F_LOGIN_USER_NAME" jdbcType="VARCHAR"/>
+        <result property="username" column="F_USER_NAME" jdbcType="VARCHAR"/>
+        <result property="password" column="F_PASSWORD" jdbcType="VARCHAR"/>
+        <result property="sex" column="F_SEX" jdbcType="CHAR"/>
+        <result property="age" column="F_AGE" jdbcType="TINYINT"/>
+        <result property="email" column="F_EMAIL" jdbcType="VARCHAR"/>
+        <result property="phoneNumber" column="F_PHONE_NUMBER" jdbcType="VARCHAR"/>
+        <result property="userType" column="F_USER_TYPE" jdbcType="CHAR"/>
+        <result property="createTime" column="F_CREATE_TIME" jdbcType="DATETIME"/>
+    </resultMap>
+
+    <sql id="baseColumn" >
+        F_ID,F_LOGIN_USER_NAME,F_USER_NAME,F_PASSWORD,F_SEX,F_AGE,F_EMAIL,F_PHONE_NUMBER,F_USER_TYPE,F_CREATE_TIME
+    </sql>
+
+    <select id="queryUserByUsername" resultMap="BaseResultMap" >
+        select
+            <include refid="baseColumn"/>
+        from
+             t_tis_user
+        where
+            f_login_name = #{username}
+    </select>
+</mapper>
