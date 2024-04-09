@@ -26,5 +26,5 @@ public interface UserMapper {
      * 添加用户
      * @param registerDto
      */
-    void addUser(RegisterDto registerDto);
+    void addUser(@Param("id")String id,@Param("registerDto")RegisterDto registerDto);
 }

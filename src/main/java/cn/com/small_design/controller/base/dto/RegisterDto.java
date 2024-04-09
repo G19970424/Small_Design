@@ -9,6 +9,15 @@ public class RegisterDto {
     private String username;
     private String loginName;
     private String password;
+    private char userType;
+
+    public char getUserType() {
+        return userType;
+    }
+
+    public void setUserType(char userType) {
+        this.userType = userType;
+    }
 
     public String getUsername() {
         return username;

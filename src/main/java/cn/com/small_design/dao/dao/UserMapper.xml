@@ -30,14 +30,17 @@
             f_login_user_name = #{username}
     </select>
 
-    <insert id="addUser" parameterType="cn.com.small_design.controller.base.dto.RegisterDto">
+    <insert id="addUser">
         insert into
-            t_tis_user(F_ID,F_LOGIN_USER_NAME,F_USER_NAME,F_PASSWORD)
-        value
-            #(id)
-            #(username),
-            #(loginName),
-            #(password)
+            t_tis_user(F_ID,F_LOGIN_USER_NAME,F_USER_NAME,F_PASSWORD,F_USER_TYPE)
+        values(
+            #(id),
+            #(registerDto.loginName,jdbcType=VARCHAR),
+            #(registerDto.username,jdbcType=VARCHAR),
+            #(registerDto.password,jdbcType=VARCHAR),
+            #(registerDto.userType,jdbcType=CHAR)
+            )
+
 
     </insert>
 </mapper>

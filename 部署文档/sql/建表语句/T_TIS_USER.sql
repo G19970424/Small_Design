@@ -13,3 +13,5 @@ create table t_tis_user(
     f_create_time DATETIME DEFAULT NULL COMMENT '创建时间',
     primary key(f_id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8mb4 comment='用户表'
+
+insert into  t_tis_user(F_ID,F_LOGIN_USER_NAME,F_USER_NAME,F_PASSWORD,F_USER_TYPE)  values('bb2471e332b8403a875fcb180d599d73','gejiaju','gejiaju','$2a$10$oA0vUapinngy0Fv7TlXg/e9QnOV2GqkTgJ7e/2jDTX2qNuOUNmOeO','1' )

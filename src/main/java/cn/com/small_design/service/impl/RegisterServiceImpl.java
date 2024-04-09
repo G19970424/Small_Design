@@ -1,6 +1,7 @@
 package cn.com.small_design.service.impl;
 
 import cn.com.small_design.common.response.RestResponse;
+import cn.com.small_design.common.response.ResultApi;
 import cn.com.small_design.controller.base.dto.RegisterDto;
 import cn.com.small_design.dao.dao.UserMapper;
 import cn.com.small_design.dao.dao.pojo.User;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * @author gejj
@@ -41,7 +43,8 @@ public class RegisterServiceImpl implements IRegisterService {
         //对密码进行加密
         registerDto.setPassword(encoder.encode(registerDto.getPassword()));
         //保存用户
-        userMapper.addUser(registerDto);
-        return null;
+        String userId = UUID.randomUUID().toString().replaceAll("-","");
+        userMapper.addUser(userId,registerDto);
+        return ResultApi.ok();
     }
 }
