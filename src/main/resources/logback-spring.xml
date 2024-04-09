@@ -127,6 +127,12 @@
     <logger name="java.sql.PreparedStatement" level="DEBUG"/>
     <logger name="java.sql.CallableStatement" level="DEBUG"/>
 
+    <logger name="cn.com.small_design.dao" level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="LOG_INFO"/>
+        <appender-ref ref="LOG_WARN"/>
+        <appender-ref ref="LOG_ERROR"/>
+    </logger>
 
     <!--开发环境-->
     <springProfile name="dev">
