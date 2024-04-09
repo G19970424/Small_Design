@@ -5,6 +5,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -17,6 +18,7 @@ import java.util.UUID;
  * @createTime 2024年03月25日 16:16
  * @version 1.0
  */
+@Component
 public class JwtUtils {
 
     /**
@@ -38,37 +40,35 @@ public class JwtUtils {
         return token;
     }
 
-    public static String createJWT(String subject){
-        //设置过期时间
-        JwtBuilder builder = getJwtBuilder(subject,null,getUUID());
-        return builder.compact();
+    public static String createJwt(String object,String userId){
+        JwtBuilder jwtBuilder = getJwtBuilder(object, getUUID(), userId);
+        return jwtBuilder.compact();
     }
 
-    public static String createJWT(String id,String subject,Long ttlMillis){
-        JwtBuilder builder = getJwtBuilder(subject,ttlMillis,id);
-        return builder.compact();
-    }
-
+    /**
+     * 生成加密后的密钥
+     * @return
+     */
     public static SecretKey generalKey(){
         byte[] decode = Base64.getDecoder().decode(JWE_KEY);
         SecretKeySpec ase = new SecretKeySpec(decode, 0, decode.length, "ASE");
         return ase;
     }
 
-    public static String createJWT(String subject, Long ttlMillis) {
-        JwtBuilder builder = getJwtBuilder(subject, ttlMillis, getUUID());// 设置过期时间
-        return builder.compact();
-    }
-
-    private static JwtBuilder getJwtBuilder(String subject, Long ttlMillis, String uuid) {
+    /**
+     * 生成jwt
+     * @param subject
+     * @param uuid
+     * @param userId
+     * @return
+     */
+    private static JwtBuilder getJwtBuilder(String subject, String uuid, String userId) {
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         SecretKey secretKey = generalKey();
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
-        if(ttlMillis==null){
-            ttlMillis=JwtUtils.JWT_TTL;
-        }
-        long expMillis = nowMillis + ttlMillis;
+
+        long expMillis = nowMillis + JWT_TTL;
         Date expDate = new Date(expMillis);
         return Jwts.builder()
                 .setId(uuid)              //唯一的ID
@@ -76,7 +76,8 @@ public class JwtUtils {
                 .setIssuer("small")     // 签发者
                 .setIssuedAt(now)      // 签发时间
                 .signWith(signatureAlgorithm, secretKey) //使用HS256对称加密算法签名, 第二个参数为秘钥
-                .setExpiration(expDate);
+                .setExpiration(expDate)
+                .claim("userId",userId);
     }
 
     /**
