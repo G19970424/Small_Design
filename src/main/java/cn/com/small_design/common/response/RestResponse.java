@@ -22,7 +22,33 @@ public class RestResponse<T> {
     private Date dateTime;
 
     public RestResponse() {
+        this.code = 200;
+        this.success = true;
+    }
 
+
+    public RestResponse(int code, String message, boolean success) {
+        this.code = code;
+        this.message = message;
+        this.success = success;
+    }
+
+    public RestResponse(int code, String message, T data,boolean success) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
+        this.success = success;
+    }
+
+
+
+    public RestResponse(int code, String message, T data, int count, boolean success, Date dateTime) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
+        this.count = count;
+        this.success = success;
+        this.dateTime = dateTime;
     }
 
     public int getCode() {
