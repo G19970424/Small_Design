@@ -25,13 +25,26 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
+    /**
+     * jwt认证拦截器
+     */
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    /**
+     * security 密码加密方式
+     * @return
+     */
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * 身份验证管理器
+     * @return
+     * @throws Exception
+     */
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -42,13 +55,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
        http //关闭csrf
             .csrf().disable()
-               .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+               .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//禁用session
                .and()
-               .authorizeRequests()
-               .antMatchers("/login").anonymous()
-               .anyRequest().authenticated();
-
+               .authorizeRequests()//进行认证请求配置
+               .antMatchers("/login").anonymous()//无需认证访问
+               .antMatchers("/register").anonymous()
+               .anyRequest().authenticated()//其他访问均需认证
+               .and()
+               .cors();//允许跨域
+        //添加token校验过滤器，将token校验过滤器添加在UsernamePasswordAuthenticationFilter前
        http.addFilterBefore(jwtAuthenticationFilter,UsernamePasswordAuthenticationFilter.class);
     }
+
 
 }
