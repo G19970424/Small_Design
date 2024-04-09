@@ -44,23 +44,30 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        Claims claims = null;
+        String userId;
         try {
-            claims = JwtUtils.parseJWT(token);
+            Claims claims = JwtUtils.parseJWT(token);
+            userId = claims.get("userId",String.class);
         } catch (Exception e) {
             //token解析超时、非法
-            e.printStackTrace();
+            logger.info("token 非法");
+            throw new RuntimeException("token 非法");
         }
 
-        String userId = claims.getId();
+        if(Objects.isNull(userId)){
+            logger.info("user id 未查询到！");
+            throw new RuntimeException("user id 未查询到！");
+        }
 
         UserInfo user = redisUtils.getCacheObject("login:" + userId);
 
         //验证是否存在登录用户
         if(Objects.isNull(user)){
             //用户登录过期，请重新登录
-            return;
+            logger.info("用户未登录！");
+            throw new RuntimeException("用户未登录");
         }
+        //将用户安全信息存入SecurityContextHolder
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user,null,null);
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         chain.doFilter(request,response);
