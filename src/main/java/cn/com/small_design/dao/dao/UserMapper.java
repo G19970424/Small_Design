@@ -1,5 +1,6 @@
 package cn.com.small_design.dao.dao;
 
+import cn.com.small_design.controller.base.dto.RegisterDto;
 import cn.com.small_design.dao.dao.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -20,4 +21,10 @@ public interface UserMapper {
      * @return
      */
     User queryUserByUsername(@Param("username")String username);
+
+    /**
+     * 添加用户
+     * @param registerDto
+     */
+    void addUser(RegisterDto registerDto);
 }

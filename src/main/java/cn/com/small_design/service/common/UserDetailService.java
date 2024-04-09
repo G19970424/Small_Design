@@ -1,7 +1,8 @@
 package cn.com.small_design.service.common;
 
 import cn.com.small_design.common.common.UserInfo;
-import cn.com.small_design.controller.base.bean.UserFormBean;
+import cn.com.small_design.common.utils.JwtUtils;
+import cn.com.small_design.common.utils.RedisUtils;
 import cn.com.small_design.dao.dao.UserMapper;
 import cn.com.small_design.dao.dao.pojo.User;
 import org.slf4j.Logger;
@@ -13,7 +14,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -28,9 +28,13 @@ public class UserDetailService implements UserDetailsService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private RedisUtils redisUtils;
+    @Autowired
+    private JwtUtils jwtUtils;
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String s) {
         //用户信息查询
         User user = userMapper.queryUserByUsername(s);
 

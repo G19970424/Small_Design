@@ -14,7 +14,7 @@
         <result property="email" column="F_EMAIL" jdbcType="VARCHAR"/>
         <result property="phoneNumber" column="F_PHONE_NUMBER" jdbcType="VARCHAR"/>
         <result property="userType" column="F_USER_TYPE" jdbcType="CHAR"/>
-        <result property="createTime" column="F_CREATE_TIME" jdbcType="DATETIME"/>
+        <result property="createTime" column="F_CREATE_TIME" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="baseColumn" >
@@ -27,6 +27,17 @@
         from
              t_tis_user
         where
-            f_login_name = #{username}
+            f_login_user_name = #{username}
     </select>
+
+    <insert id="addUser" parameterType="cn.com.small_design.controller.base.dto.RegisterDto">
+        insert into
+            t_tis_user(F_ID,F_LOGIN_USER_NAME,F_USER_NAME,F_PASSWORD)
+        value
+            #(id)
+            #(username),
+            #(loginName),
+            #(password)
+
+    </insert>
 </mapper>
