@@ -29,7 +29,7 @@ public class JwtUtils {
     /**
      * 密钥明文
      */
-    public static final String JWE_KEY = "";
+    public static final String JWE_KEY = "design";
 
     /**
      * 获取uuid
