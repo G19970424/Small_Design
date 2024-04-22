@@ -23,9 +23,16 @@ public class LoginController {
     @Autowired
     private ILoginService loginService;
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
     public RestResponse login(@RequestBody UserDto userDto){
-        loginService.login(userDto);
-        return ResultApi.ok();
+        RestResponse res;
+        try {
+            loginService.login(userDto);
+            res = ResultApi.ok();
+        }catch (Exception e){
+            res = ResultApi.fail();
+            logger.error(e.getMessage());
+        }
+        return res;
     }
 }
