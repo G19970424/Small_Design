@@ -3,14 +3,19 @@ package cn.com.small_design.controller.base.dto;
 
 /**
  * @author gejj
- * @createTime 2024年03月25日 15:48
+ * @create 2024年03月25日 15:48
  * @version 1.0
  */
 public class UserDto {
     /** 登录用户名称 */
-    String username;
+    private String username;
     /** 登录用户密码 */
-    String password;
+    private String password;
+    /** 登录验证码 */
+    private String captcha;
+    /** 验证码key*/
+    private String captchaKey;
+
 
     public UserDto() {
     }
@@ -29,5 +34,21 @@ public class UserDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCaptcha() {
+        return captcha;
+    }
+
+    public void setCaptcha(String captcha) {
+        this.captcha = captcha;
+    }
+
+    public String getCaptchaKey() {
+        return captchaKey;
+    }
+
+    public void setCaptchaKey(String captchaKey) {
+        this.captchaKey = captchaKey;
     }
 }

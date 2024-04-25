@@ -5,7 +5,7 @@ import cn.com.small_design.controller.base.dto.RegisterDto;
 
 /**
  * @author gejj
- * @createTime 2024年04月09日 16:32
+ * @create 2024年04月09日 16:32
  * @version 1.0
  */
 public interface IRegisterService {

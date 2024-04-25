@@ -6,14 +6,13 @@ import cn.com.small_design.service.IRegisterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author gejj
- * @createTime 2024年03月25日 14点59分
+ * @create 2024年03月25日 14点59分
  * @version 1.0
  *
  * 注册接口
@@ -25,7 +24,7 @@ public class RegisterController {
     @Autowired
     private IRegisterService registerService;
 
-    @RequestMapping("/register")
+    @PostMapping("/register")
     public RestResponse register(@RequestBody RegisterDto registerDto){
         return registerService.register(registerDto);
     }

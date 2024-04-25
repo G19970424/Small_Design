@@ -10,8 +10,8 @@ import java.util.List;
 
 /**
  * @author gejj
+ * @create 2024年04月02日 14:10
  * @version 1.0
- * @createTime 2024年04月02日 14:10
  */
 public class UserInfo implements UserDetails, Serializable {
 

@@ -10,8 +10,8 @@ import java.io.PrintWriter;
 
 /**
  * @author gejj
+ * @create 2024年03月25日 15:24
  * @version 1.0
- * @createTime 2024年03月25日 15:24
  */
 public abstract class JSONAuthentication {
 

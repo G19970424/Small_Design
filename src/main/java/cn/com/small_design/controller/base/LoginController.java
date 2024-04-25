@@ -7,11 +7,13 @@ import cn.com.small_design.service.ILoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author gejj
- * @createTime 2024年03月25日 14点59分
+ * @create 2024年03月25日 14点59分
  * @version 1.0
  *
  * 登录接口
@@ -23,14 +25,14 @@ public class LoginController {
     @Autowired
     private ILoginService loginService;
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @PostMapping("/login")
     public RestResponse login(@RequestBody UserDto userDto){
         RestResponse res;
         try {
-            loginService.login(userDto);
-            res = ResultApi.ok();
+            String jwt = loginService.login(userDto);
+            res = ResultApi.ok(jwt);
         }catch (Exception e){
-            res = ResultApi.fail();
+            res = ResultApi.fail(e.getMessage());
             logger.error(e.getMessage());
         }
         return res;

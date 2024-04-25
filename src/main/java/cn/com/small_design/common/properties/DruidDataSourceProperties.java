@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author gejj
- * @createTime 2024年03月25日 14点59分
+ * @create 2024年03月25日 14点59分
  * @version 1.0
  */
 @ConfigurationProperties(prefix = "spring.datasource.druid")

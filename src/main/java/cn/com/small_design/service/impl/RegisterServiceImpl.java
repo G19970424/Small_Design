@@ -17,7 +17,7 @@ import java.util.UUID;
 
 /**
  * @author gejj
- * @createTime 2024年04月09日 16:33
+ * @create  2024年04月09日 16:33
  * @version 1.0
  */
 
@@ -34,7 +34,7 @@ public class RegisterServiceImpl implements IRegisterService {
     @Override
     public RestResponse<?> register(RegisterDto registerDto) {
         //验证用户信息是否存在
-        User user = userMapper.queryUserByUsername(registerDto.getLoginName());
+        User user = userMapper.queryUserByUsername(registerDto.getUsername());
 
         if(!Objects.isNull(user)){
             logger.info("该用户名已存在，请重新输入登录用户名！");

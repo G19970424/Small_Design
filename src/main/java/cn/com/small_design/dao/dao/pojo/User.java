@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * @author gejj
- * @createTime 2024年03月25日 15:40
+ * @create 2024年03月25日 15:40
  * @version 1.0
  */
 public class User {

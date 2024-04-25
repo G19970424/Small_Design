@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 /**
  * @author gejj
- * @createTime 2024年03月25日 15:27
+ * @create 2024年03月25日 15:27
  * @version 1.0
  */
 
@@ -60,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                .authorizeRequests()//进行认证请求配置
                .antMatchers("/login").anonymous()//无需认证访问
                .antMatchers("/register").anonymous()
+               .antMatchers("/captcha").anonymous()
                .anyRequest().authenticated()//其他访问均需认证
                .and()
                .cors();//允许跨域
