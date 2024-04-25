@@ -1,6 +1,7 @@
 package cn.com.small_design.controller.base;
 
 import cn.com.small_design.common.response.RestResponse;
+import cn.com.small_design.common.response.ResultApi;
 import cn.com.small_design.controller.base.dto.RegisterDto;
 import cn.com.small_design.service.IRegisterService;
 import org.slf4j.Logger;
@@ -24,8 +25,16 @@ public class RegisterController {
     @Autowired
     private IRegisterService registerService;
 
+    /**
+     * 注册接口实现
+     * @param registerDto
+     * @return
+     */
     @PostMapping("/register")
     public RestResponse register(@RequestBody RegisterDto registerDto){
-        return registerService.register(registerDto);
+        RestResponse res;
+        registerService.register(registerDto);
+        res = ResultApi.ok("用户注册成功");
+        return res;
     }
 }

@@ -1,16 +1,17 @@
 package cn.com.small_design.service.common;
 
 import cn.com.small_design.common.common.UserInfo;
+import cn.com.small_design.common.exception.BusinessException;
 import cn.com.small_design.common.utils.JwtUtils;
 import cn.com.small_design.common.utils.RedisUtils;
 import cn.com.small_design.dao.dao.UserMapper;
 import cn.com.small_design.dao.dao.pojo.User;
+import cn.com.small_design.handler.enums.GlobalExceptionEnums;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -40,8 +41,7 @@ public class UserDetailService implements UserDetailsService {
 
         //判断用户是否存在
         if(Objects.isNull(user)){
-            logger.error("用户登录失败");
-            throw new UsernameNotFoundException("用户名不存在");
+            throw new BusinessException(GlobalExceptionEnums.INCORRECT_USERNAME_OR_PASSWORD);
         }
 
         //用户权限信息查询

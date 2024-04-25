@@ -25,16 +25,13 @@ public class LoginController {
     @Autowired
     private ILoginService loginService;
 
+    /**
+     * 用户登录接口实现
+     * @param userDto 登录用户实体类
+     * @return
+     */
     @PostMapping("/login")
     public RestResponse login(@RequestBody UserDto userDto){
-        RestResponse res;
-        try {
-            String jwt = loginService.login(userDto);
-            res = ResultApi.ok(jwt);
-        }catch (Exception e){
-            res = ResultApi.fail(e.getMessage());
-            logger.error(e.getMessage());
-        }
-        return res;
+        return ResultApi.ok(loginService.login(userDto));
     }
 }

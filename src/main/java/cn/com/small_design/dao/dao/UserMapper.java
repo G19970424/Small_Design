@@ -1,10 +1,11 @@
 package cn.com.small_design.dao.dao;
 
-import cn.com.small_design.controller.base.dto.RegisterDto;
 import cn.com.small_design.dao.dao.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.io.IOException;
 
 /**
  * @author gejj
@@ -24,7 +25,7 @@ public interface UserMapper {
 
     /**
      * 添加用户
-     * @param registerDto
+     * @param user
      */
-    void addUser(@Param("id")String id,@Param("registerDto")RegisterDto registerDto);
+    void addUser(@Param("user") User user);
 }

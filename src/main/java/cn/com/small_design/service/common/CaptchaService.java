@@ -1,6 +1,8 @@
 package cn.com.small_design.service.common;
 
+import cn.com.small_design.common.exception.BusinessException;
 import cn.com.small_design.common.utils.RedisUtils;
+import cn.com.small_design.handler.enums.GlobalExceptionEnums;
 import cn.com.small_design.service.common.vo.CaptchaVO;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.slf4j.Logger;
@@ -44,8 +46,8 @@ public class CaptchaService {
         try {
             ImageIO.write(image, "jpg", outputStream);
         } catch (IOException e) {
-            logger.error("验证码生成失败");
-            throw new RuntimeException("验证码生成失败");
+            logger.error("验证码生成失败"+e.getMessage());
+            throw new BusinessException(GlobalExceptionEnums.CAPTCHA_GENERATION_FAIL);
         }
         // 对字节数组Base64编码
         BASE64Encoder encoder = new BASE64Encoder();

@@ -1,10 +1,12 @@
 package cn.com.small_design.service.impl;
 
 import cn.com.small_design.common.common.UserInfo;
+import cn.com.small_design.common.exception.BusinessException;
 import cn.com.small_design.common.utils.JwtUtils;
 import cn.com.small_design.common.utils.RedisUtils;
 import cn.com.small_design.controller.base.dto.UserDto;
 import cn.com.small_design.dao.dao.pojo.User;
+import cn.com.small_design.handler.enums.GlobalExceptionEnums;
 import cn.com.small_design.service.ILoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,20 +43,13 @@ public class LoginServiceImpl implements ILoginService {
         Object captcha = redisUtils.getCacheObject(CAPTCHA_KEY+userDto.getCaptchaKey());
 
         //用户认证校验
-        if(Objects.isNull(captcha)){
-            logger.error("验证码失效！");
-            throw new RuntimeException("验证码失效！");
-        }
-
-        if(!userDto.getCaptcha().equals(captcha)){
-            logger.error("验证码错误！");
-            throw new RuntimeException("验证码错误！");
+        if(Objects.isNull(captcha) || !userDto.getCaptcha().equals(captcha)){
+            throw new BusinessException(GlobalExceptionEnums.CAPTCHA_ERROR);
         }
 
         //用户认证失败
         if(Objects.isNull(authenticate)){
-            logger.info("用户名/密码错误");
-            throw new RuntimeException("用户名/密码错误");
+            throw new BusinessException(GlobalExceptionEnums.INCORRECT_USERNAME_OR_PASSWORD);
         }
 
         //获取用户信息

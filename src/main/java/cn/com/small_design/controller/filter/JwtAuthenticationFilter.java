@@ -1,8 +1,10 @@
 package cn.com.small_design.controller.filter;
 
 import cn.com.small_design.common.common.UserInfo;
+import cn.com.small_design.common.exception.BusinessException;
 import cn.com.small_design.common.utils.JwtUtils;
 import cn.com.small_design.common.utils.RedisUtils;
+import cn.com.small_design.handler.enums.GlobalExceptionEnums;
 import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,13 +52,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             userId = claims.get("userId",String.class);
         } catch (Exception e) {
             //token解析超时、非法
-            logger.info("token 非法");
-            throw new RuntimeException("token 非法");
+            throw new BusinessException(GlobalExceptionEnums.TOKEN_PARSING_EXCEPTION);
         }
 
         if(Objects.isNull(userId)){
-            logger.info("user id 未查询到！");
-            throw new RuntimeException("user id 未查询到！");
+            throw new BusinessException(GlobalExceptionEnums.OBTAIN_USERID_ERROR);
         }
 
         UserInfo user = redisUtils.getCacheObject("login:" + userId);
@@ -64,8 +64,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         //验证是否存在登录用户
         if(Objects.isNull(user)){
             //用户登录过期，请重新登录
-            logger.info("用户未登录！");
-            throw new RuntimeException("用户未登录");
+            throw new BusinessException(GlobalExceptionEnums.USER_LOGIN_TIMEOUT);
         }
         //将用户安全信息存入SecurityContextHolder
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user,null,null);

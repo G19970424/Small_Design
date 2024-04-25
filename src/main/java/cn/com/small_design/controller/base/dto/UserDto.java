@@ -5,6 +5,8 @@ package cn.com.small_design.controller.base.dto;
  * @author gejj
  * @create 2024年03月25日 15:48
  * @version 1.0
+ *
+ * 登录用户实体类
  */
 public class UserDto {
     /** 登录用户名称 */

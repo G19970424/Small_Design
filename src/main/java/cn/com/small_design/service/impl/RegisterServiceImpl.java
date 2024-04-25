@@ -1,10 +1,12 @@
 package cn.com.small_design.service.impl;
 
+import cn.com.small_design.common.exception.BusinessException;
 import cn.com.small_design.common.response.RestResponse;
 import cn.com.small_design.common.response.ResultApi;
 import cn.com.small_design.controller.base.dto.RegisterDto;
 import cn.com.small_design.dao.dao.UserMapper;
 import cn.com.small_design.dao.dao.pojo.User;
+import cn.com.small_design.handler.enums.GlobalExceptionEnums;
 import cn.com.small_design.service.IRegisterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,14 +39,27 @@ public class RegisterServiceImpl implements IRegisterService {
         User user = userMapper.queryUserByUsername(registerDto.getUsername());
 
         if(!Objects.isNull(user)){
-            logger.info("该用户名已存在，请重新输入登录用户名！");
-            throw new RuntimeException("该用户名已存在，请重新输入登录用户名！");
+            throw new BusinessException(GlobalExceptionEnums.REPEAT_OF_USERNAME);
         }
         //对密码进行加密
         registerDto.setPassword(encoder.encode(registerDto.getPassword()));
         //保存用户
         String userId = UUID.randomUUID().toString().replaceAll("-","");
-        userMapper.addUser(userId,registerDto);
+
+        //用户类型判定,当前系统默认为普通用户1
+        user = conversion(userId, registerDto);
+        userMapper.addUser(user);
         return ResultApi.ok();
     }
+
+    private User conversion(String id,RegisterDto registerDto){
+        User user = new User();
+        user.setId(id);
+        user.setUsername(registerDto.getUsername());
+        user.setLoginName(registerDto.getUsername());
+        user.setPassword(registerDto.getPassword());
+        user.setUserType('1');
+        return user;
+    }
+
 }
