@@ -25,6 +25,9 @@ import java.util.UUID;
 @Transactional
 public class ArticleServiceImpl implements IArticleService {
 
+    /**
+     * 日志器
+     */
     private static final Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
 
     @Autowired

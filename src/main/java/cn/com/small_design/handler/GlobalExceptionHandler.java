@@ -27,13 +27,14 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(SQLException.class)
     public RestResponse handlerIOException(SQLException exception){
-        logger.error(exception.getMessage());
+        logger.error("SQLException:{}",exception.getMessage());
         return ResultApi.fail(GlobalExceptionEnums.DATABASE_ERROR);
     }
 
 
     @ExceptionHandler(BusinessException.class)
     public RestResponse handlerBusinessException(BusinessException exception){
+        logger.error("BusinessException:{}",exception.getMessage());
         return ResultApi.fail(exception.getStatusCode());
     }
 }

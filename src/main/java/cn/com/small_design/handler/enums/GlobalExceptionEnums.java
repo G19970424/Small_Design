@@ -6,6 +6,16 @@ package cn.com.small_design.handler.enums;
  * @version 1.0
  */
 public enum GlobalExceptionEnums {
+    /** 全局异常捕获 */
+    EXCEPTION("8080","系统异常，请联系管理员"),
+    /** 系统相关异常 */
+    RC400("400","参数异常"),
+    RC401("401","访问未经授权"),
+    RC402("402",""),
+    RC403("403","请求被拒绝访问"),
+    RC404("404","请求失败"),
+    RC405("405","方法不被允许执行"),
+
     /** 用户登录相关异常 */
     INCORRECT_USERNAME_OR_PASSWORD("2001","用户名或密码错误"),
     REPEAT_OF_USERNAME("2002","用户名重复，请重新输入"),

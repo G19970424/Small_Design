@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 文章接口
  */
 
-@RestController("/article")
+@RestController
 public class ArticleController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class ArticleController {
      * 查询文章
      * @return
      */
-    @PostMapping("/query")
+    @PostMapping("/article/query")
     public RestResponse query(){
         return ResultApi.ok(articleService.query());
     }
@@ -39,6 +39,7 @@ public class ArticleController {
      * @param articleDto 文章实体类
      * @return
      */
+    @PostMapping("/article/insert")
     public RestResponse insert(@RequestBody ArticleDto articleDto){
         articleService.insert(articleDto);
         return ResultApi.ok();

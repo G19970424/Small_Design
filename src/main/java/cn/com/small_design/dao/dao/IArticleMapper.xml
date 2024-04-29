@@ -33,7 +33,7 @@
                 #{article.title,jdbcType=VARCHAR},
                 #{article.label,jdbcType=VARCHAR},
                 #{article.content,jdbcType=VARCHAR},
-                now(),
+                now()
               )
     </insert>
 </mapper>

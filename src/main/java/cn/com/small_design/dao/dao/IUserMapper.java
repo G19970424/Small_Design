@@ -1,9 +1,12 @@
 package cn.com.small_design.dao.dao;
 
+import cn.com.small_design.controller.manager.dto.UserManagerDto;
 import cn.com.small_design.dao.dao.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author gejj
@@ -24,5 +27,17 @@ public interface IUserMapper {
      * 添加用户
      * @param user
      */
-    void addUser(@Param("user") User user);
+    void addUser(@Param("user")User user);
+
+    /**
+     * 查询所有用户信息
+     * @return
+     */
+    List<User> queryAll();
+
+    /**
+     * 更新用户信息
+     * @param user
+     */
+    void update(@Param("user")User user);
 }

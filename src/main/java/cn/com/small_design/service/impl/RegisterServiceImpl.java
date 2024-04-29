@@ -28,6 +28,9 @@ import java.util.UUID;
 @Transactional
 public class RegisterServiceImpl implements IRegisterService {
 
+    /**
+     * 日志器
+     */
     private static final Logger logger = LoggerFactory.getLogger(RegisterServiceImpl.class);
 
     @Autowired

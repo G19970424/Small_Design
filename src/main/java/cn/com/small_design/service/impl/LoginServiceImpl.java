@@ -27,6 +27,9 @@ import java.util.Objects;
 @Transactional
 public class LoginServiceImpl implements ILoginService {
 
+    /**
+     * 日志器
+     */
     private static final Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
 
     @Autowired

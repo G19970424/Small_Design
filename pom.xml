@@ -55,6 +55,12 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!--分布式事务管理器 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jta-atomikos</artifactId>
+        </dependency>
+
         <!--druid连接池-->
         <dependency>
             <groupId>com.alibaba</groupId>

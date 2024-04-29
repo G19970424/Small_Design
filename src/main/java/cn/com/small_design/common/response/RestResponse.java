@@ -24,6 +24,7 @@ public class RestResponse<T> {
     public RestResponse() {
         this.code = 200;
         this.success = true;
+        this.dateTime = new Date();
     }
 
 
@@ -31,6 +32,7 @@ public class RestResponse<T> {
         this.code = code;
         this.message = message;
         this.success = success;
+        this.dateTime = new Date();
     }
 
     public RestResponse(int code, String message, T data,boolean success) {
@@ -38,6 +40,7 @@ public class RestResponse<T> {
         this.message = message;
         this.data = data;
         this.success = success;
+        this.dateTime = new Date();
     }
 
 
