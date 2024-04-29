@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.small_design.dao.dao.IArticleMapper">
+    <resultMap id="BaseResultMap" type="cn.com.small_design.dao.dao.pojo.Article">
+        <id property="id" column="F_ID" jdbcType="VARCHAR"/>
+        <result property="uid" column="F_USER_ID" jdbcType="VARCHAR"/>
+        <result property="title" column="F_TITLE" jdbcType="VARCHAR"/>
+        <result property="label" column="F_LABEL" jdbcType="VARCHAR"/>
+        <result property="content" column="F_CONTENT" jdbcType="VARCHAR"/>
+        <result property="heat" column="F_HEAT" jdbcType="TINYINT"/>
+        <result property="createTime" column="F_CREATE_TIME" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="baseColumn">
+        F_ID,F_USER_ID,F_TITLE,F_LABEL,F_CONTENT,F_HEAT,F_CREATE_TIME
+    </sql>
+
+    <select id="query" resultMap="BaseResultMap">
+        select
+            <include refid="baseColumn"/>
+        from
+            t_tis_article;
+    </select>
+
+
+    <insert id="insert">
+        insert into
+            t_tis_article(F_ID,F_USER_ID,F_TITLE,F_LABEL,F_CONTENT,F_CREATE_TIME)
+        values(
+                #{article.id,jdbcType=VARCHAR},
+                #{article.uid,jdbcType=VARCHAR},
+                #{article.title,jdbcType=VARCHAR},
+                #{article.label,jdbcType=VARCHAR},
+                #{article.content,jdbcType=VARCHAR},
+                now(),
+              )
+    </insert>
+</mapper>
