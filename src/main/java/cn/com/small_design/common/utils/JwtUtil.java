@@ -19,7 +19,7 @@ import java.util.UUID;
  * @version 1.0
  */
 @Component
-public class JwtUtils {
+public class JwtUtil {
 
     /**
      * 过期时间

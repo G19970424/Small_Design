@@ -5,17 +5,14 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import java.io.IOException;
-
 /**
  * @author gejj
  * @create 2024年03月25日 15:40
  * @version 1.0
  */
-
 @Mapper
 @Repository
-public interface UserMapper {
+public interface IUserMapper {
     /**
      * 通过用户登录名查询用户信息
      * @param username
