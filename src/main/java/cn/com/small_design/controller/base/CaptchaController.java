@@ -3,8 +3,6 @@ package cn.com.small_design.controller.base;
 import cn.com.small_design.common.response.RestResponse;
 import cn.com.small_design.common.response.ResultApi;
 import cn.com.small_design.service.common.CaptchaService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1.0
  *
  * 请求验证码接口
+ *
+ *
  */
 @RestController
 public class CaptchaController {
