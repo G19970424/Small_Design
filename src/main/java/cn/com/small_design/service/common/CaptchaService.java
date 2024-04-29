@@ -1,7 +1,7 @@
 package cn.com.small_design.service.common;
 
 import cn.com.small_design.common.exception.BusinessException;
-import cn.com.small_design.common.utils.RedisUtils;
+import cn.com.small_design.common.utils.RedisUtil;
 import cn.com.small_design.handler.enums.GlobalExceptionEnums;
 import cn.com.small_design.service.common.vo.CaptchaVO;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
@@ -28,7 +28,7 @@ public class CaptchaService {
     private static final Logger logger = LoggerFactory.getLogger(CaptchaService.class);
 
     @Autowired
-    private RedisUtils redisUtils;
+    private RedisUtil redisUtils;
     @Autowired
     private DefaultKaptcha producer;
 

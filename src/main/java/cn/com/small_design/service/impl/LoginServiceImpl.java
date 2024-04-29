@@ -2,10 +2,9 @@ package cn.com.small_design.service.impl;
 
 import cn.com.small_design.common.common.UserInfo;
 import cn.com.small_design.common.exception.BusinessException;
-import cn.com.small_design.common.utils.JwtUtils;
-import cn.com.small_design.common.utils.RedisUtils;
+import cn.com.small_design.common.utils.JwtUtil;
+import cn.com.small_design.common.utils.RedisUtil;
 import cn.com.small_design.controller.base.dto.UserDto;
-import cn.com.small_design.dao.dao.pojo.User;
 import cn.com.small_design.handler.enums.GlobalExceptionEnums;
 import cn.com.small_design.service.ILoginService;
 import org.slf4j.Logger;
@@ -31,7 +30,7 @@ public class LoginServiceImpl implements ILoginService {
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
-    private RedisUtils redisUtils;
+    private RedisUtil redisUtils;
 
     private final String CAPTCHA_KEY = "captcha:verification:";
     @Override
@@ -58,7 +57,7 @@ public class LoginServiceImpl implements ILoginService {
         String id = userInfo.getUser().getId();
 
         //用户认证通过，生成返回前端的jwt信息，用于进行用户信息权限验证
-        String jwt = JwtUtils.createJwt("userId", id);
+        String jwt = JwtUtil.createJwt("userId", id);
 
         //将用户信息缓存到redis中
         redisUtils.setCacheObject("login:"+id,userInfo);

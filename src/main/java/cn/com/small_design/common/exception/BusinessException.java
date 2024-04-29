@@ -1,6 +1,5 @@
 package cn.com.small_design.common.exception;
 
-import cn.com.small_design.common.response.StatusCode;
 import cn.com.small_design.handler.enums.GlobalExceptionEnums;
 
 /**
@@ -12,8 +11,15 @@ import cn.com.small_design.handler.enums.GlobalExceptionEnums;
  */
 public class BusinessException extends RuntimeException{
 
-    private final GlobalExceptionEnums statusCode;
+    private GlobalExceptionEnums statusCode;
 
+    public BusinessException(){
+        super();
+    }
+
+    public BusinessException(String msg){
+        super(msg);
+    }
 
     public BusinessException(GlobalExceptionEnums enums) {
         super(enums.getMessage());

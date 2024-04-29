@@ -4,7 +4,7 @@ import cn.com.small_design.common.exception.BusinessException;
 import cn.com.small_design.common.response.RestResponse;
 import cn.com.small_design.common.response.ResultApi;
 import cn.com.small_design.controller.base.dto.RegisterDto;
-import cn.com.small_design.dao.dao.UserMapper;
+import cn.com.small_design.dao.dao.IUserMapper;
 import cn.com.small_design.dao.dao.pojo.User;
 import cn.com.small_design.handler.enums.GlobalExceptionEnums;
 import cn.com.small_design.service.IRegisterService;
@@ -29,14 +29,14 @@ public class RegisterServiceImpl implements IRegisterService {
     private static final Logger logger = LoggerFactory.getLogger(RegisterServiceImpl.class);
 
     @Autowired
-    private UserMapper userMapper;
+    private IUserMapper IUserMapper;
     @Autowired
     private PasswordEncoder encoder;
 
     @Override
     public RestResponse<?> register(RegisterDto registerDto) {
         //验证用户信息是否存在
-        User user = userMapper.queryUserByUsername(registerDto.getUsername());
+        User user = IUserMapper.queryUserByUsername(registerDto.getUsername());
 
         if(!Objects.isNull(user)){
             throw new BusinessException(GlobalExceptionEnums.REPEAT_OF_USERNAME);
@@ -48,7 +48,7 @@ public class RegisterServiceImpl implements IRegisterService {
 
         //用户类型判定,当前系统默认为普通用户1
         user = conversion(userId, registerDto);
-        userMapper.addUser(user);
+        IUserMapper.addUser(user);
         return ResultApi.ok();
     }
 

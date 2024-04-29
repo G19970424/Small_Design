@@ -2,8 +2,8 @@ package cn.com.small_design.controller.filter;
 
 import cn.com.small_design.common.common.UserInfo;
 import cn.com.small_design.common.exception.BusinessException;
-import cn.com.small_design.common.utils.JwtUtils;
-import cn.com.small_design.common.utils.RedisUtils;
+import cn.com.small_design.common.utils.JwtUtil;
+import cn.com.small_design.common.utils.RedisUtil;
 import cn.com.small_design.handler.enums.GlobalExceptionEnums;
 import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
@@ -33,7 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
     @Autowired
-    private RedisUtils redisUtils;
+    private RedisUtil redisUtil;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
@@ -48,7 +48,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String userId;
         try {
-            Claims claims = JwtUtils.parseJWT(token);
+            Claims claims = JwtUtil.parseJWT(token);
             userId = claims.get("userId",String.class);
         } catch (Exception e) {
             //token解析超时、非法
@@ -59,7 +59,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throw new BusinessException(GlobalExceptionEnums.OBTAIN_USERID_ERROR);
         }
 
-        UserInfo user = redisUtils.getCacheObject("login:" + userId);
+        UserInfo user = redisUtil.getCacheObject("login:" + userId);
 
         //验证是否存在登录用户
         if(Objects.isNull(user)){
