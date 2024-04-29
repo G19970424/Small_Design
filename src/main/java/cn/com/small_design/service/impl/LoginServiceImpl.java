@@ -15,6 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Objects;
 
 /**
@@ -23,6 +24,7 @@ import java.util.Objects;
  * @version 1.0
  */
 @Service
+@Transactional
 public class LoginServiceImpl implements ILoginService {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);

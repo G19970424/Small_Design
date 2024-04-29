@@ -1,5 +1,6 @@
 package cn.com.small_design.service.impl;
 
+import cn.com.small_design.common.common.UserInfo;
 import cn.com.small_design.common.utils.SecurityUtil;
 import cn.com.small_design.controller.business.dto.ArticleDto;
 import cn.com.small_design.dao.dao.IArticleMapper;
@@ -11,7 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author gejj
@@ -19,6 +22,7 @@ import java.util.List;
  * @version 1.0
  */
 @Service
+@Transactional
 public class ArticleServiceImpl implements IArticleService {
 
     private static final Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
@@ -43,13 +47,15 @@ public class ArticleServiceImpl implements IArticleService {
     @Override
     public void insert(ArticleDto articleDto) {
         //获取当前用户信息
-        User localUser = securityUtil.getLocalUser();
+        UserInfo localUser = securityUtil.getLocalUser();
 
         //封装文章实体类
         Article article = dataTypeConversion(articleDto);
 
-        article.setId(localUser.getId());
-        article.setUid(localUser.getId());
+        //生成日志id,后续更改为用户id前10位+2位标签id+8位时间戳+12位随机数
+        String id = UUID.randomUUID().toString();
+        article.setId(id);
+        article.setUid(localUser.getUser().getId());
 
         //插入文章
         IArticleMapper.insert(article);
