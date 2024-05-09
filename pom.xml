@@ -141,6 +141,15 @@
                 </includes>
                 <filtering>true</filtering>
             </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.yaml</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
         </resources>
     </build>
 </project>
