@@ -3,9 +3,8 @@ package cn.com.small_design.service.impl;
 import cn.com.small_design.common.common.UserInfo;
 import cn.com.small_design.common.utils.SecurityUtil;
 import cn.com.small_design.controller.business.dto.ArticleDto;
-import cn.com.small_design.dao.dao.IArticleMapper;
+import cn.com.small_design.dao.dao.ArticleMapper;
 import cn.com.small_design.dao.dao.pojo.Article;
-import cn.com.small_design.dao.dao.pojo.User;
 import cn.com.small_design.service.IArticleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +30,7 @@ public class ArticleServiceImpl implements IArticleService {
     private static final Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
 
     @Autowired
-    private IArticleMapper IArticleMapper;
+    private ArticleMapper articleMapper;
     @Autowired
     private SecurityUtil securityUtil;
     /**
@@ -40,7 +39,7 @@ public class ArticleServiceImpl implements IArticleService {
      */
     @Override
     public List<Article> query() {
-        return IArticleMapper.query();
+        return articleMapper.query();
     }
 
     /**
@@ -49,6 +48,7 @@ public class ArticleServiceImpl implements IArticleService {
      */
     @Override
     public void insert(ArticleDto articleDto) {
+        logger.info("新增文章{}",articleDto.getTitle());
         //获取当前用户信息
         UserInfo localUser = securityUtil.getLocalUser();
 
@@ -60,8 +60,25 @@ public class ArticleServiceImpl implements IArticleService {
         article.setId(id);
         article.setUid(localUser.getUser().getId());
 
+        //操作日志
         //插入文章
-        IArticleMapper.insert(article);
+        articleMapper.insert(article);
+        logger.info("{}文章新增成功",articleDto.getTitle());
+    }
+
+
+    /**
+     * 根据文章id删除文章
+     * @param id
+     */
+    @Override
+    public void delete(String id) {
+        logger.info("删除文章{}",id);
+        Article old = articleMapper.queryById(id);
+        //插入日志
+        //删除文章
+        articleMapper.delete(id);
+        logger.info("文章{}已删除",id);
     }
 
     private Article dataTypeConversion(ArticleDto articleDto) {

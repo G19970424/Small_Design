@@ -3,7 +3,7 @@ package cn.com.small_design.service.impl;
 import cn.com.small_design.common.exception.BusinessException;
 import cn.com.small_design.common.utils.BCryptPasswordUtil;
 import cn.com.small_design.controller.manager.dto.UserManagerDto;
-import cn.com.small_design.dao.dao.IUserMapper;
+import cn.com.small_design.dao.dao.UserMapper;
 import cn.com.small_design.dao.dao.pojo.User;
 import cn.com.small_design.handler.enums.GlobalExceptionEnums;
 import cn.com.small_design.service.IUserManagerService;
@@ -31,7 +31,7 @@ public class UserManagerServiceImpl implements IUserManagerService {
     private static final Logger logger = LoggerFactory.getLogger(UserManagerServiceImpl.class);
 
     @Autowired
-    private IUserMapper userMapper;
+    private UserMapper userMapper;
     @Autowired
     private BCryptPasswordUtil bCryptPasswordUtil;
 

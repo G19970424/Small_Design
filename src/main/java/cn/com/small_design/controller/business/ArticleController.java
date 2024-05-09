@@ -44,4 +44,16 @@ public class ArticleController {
         articleService.insert(articleDto);
         return ResultApi.ok();
     }
+
+    /**
+     * 根据文章id删除文章
+     * @param id
+     * @return
+     */
+    @PostMapping("/article/delete")
+    public RestResponse delete(String id){
+        articleService.delete(id);
+        return ResultApi.ok();
+    }
+
 }

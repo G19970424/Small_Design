@@ -4,7 +4,6 @@ package cn.com.small_design.dao.dao;
 import cn.com.small_design.dao.dao.pojo.Article;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface IArticleMapper {
+public interface ArticleMapper {
 
     /**
      * 查询所有文章
@@ -29,4 +28,17 @@ public interface IArticleMapper {
      * @param article
      */
     void insert(@Param("article") Article article);
+
+    /**
+     * 根据id 查询文章
+     * @param id
+     * @return
+     */
+    Article queryById(String id);
+
+    /**
+     * 根据id删除文章
+     * @param id
+     */
+    void delete(String id);
 }

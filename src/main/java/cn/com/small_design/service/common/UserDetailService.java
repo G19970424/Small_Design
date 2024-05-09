@@ -4,7 +4,7 @@ import cn.com.small_design.common.common.UserInfo;
 import cn.com.small_design.common.exception.BusinessException;
 import cn.com.small_design.common.utils.JwtUtil;
 import cn.com.small_design.common.utils.RedisUtil;
-import cn.com.small_design.dao.dao.IUserMapper;
+import cn.com.small_design.dao.dao.UserMapper;
 import cn.com.small_design.dao.dao.pojo.User;
 import cn.com.small_design.handler.enums.GlobalExceptionEnums;
 import org.slf4j.Logger;
@@ -28,7 +28,7 @@ public class UserDetailService implements UserDetailsService {
     private static final Logger logger = LoggerFactory.getLogger(UserDetailService.class);
 
     @Autowired
-    private IUserMapper IUserMapper;
+    private UserMapper UserMapper;
     @Autowired
     private RedisUtil redisUtil;
     @Autowired
@@ -37,7 +37,7 @@ public class UserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) {
         //用户信息查询
-        User user = IUserMapper.queryUserByUsername(s);
+        User user = UserMapper.queryUserByUsername(s);
 
         //判断用户是否存在
         if(Objects.isNull(user)){

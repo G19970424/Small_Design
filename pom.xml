@@ -15,6 +15,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>small_design</name>
     <description>small_design</description>
+    <packaging>jar</packaging>
     <properties>
         <java.version>8</java.version>
     </properties>
@@ -118,6 +119,18 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.1.8.RELEASE</version>
+                <configuration>
+                    <mainClass>cn.com.small_design.SmallDesignApplication</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>repackage</id>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <resources>

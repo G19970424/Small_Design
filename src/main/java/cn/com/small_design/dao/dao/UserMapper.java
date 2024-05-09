@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface IUserMapper {
+public interface UserMapper {
     /**
      * 通过用户登录名查询用户信息
      * @param username

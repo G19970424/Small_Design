@@ -10,4 +10,6 @@ public interface IArticleService {
     List<Article> query();
 
     void insert(ArticleDto articleDto);
+
+    void delete(String id);
 }
