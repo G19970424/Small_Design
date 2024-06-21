@@ -15,7 +15,7 @@ public class Article {
     /**
      * 发布用户id
      */
-    private String uid;
+    private int uid;
     /**
      * 日记标题
      */
@@ -45,11 +45,11 @@ public class Article {
         this.id = id;
     }
 
-    public String getUid() {
+    public int getUid() {
         return uid;
     }
 
-    public void setUid(String uid) {
+    public void setUid(int uid) {
         this.uid = uid;
     }
 

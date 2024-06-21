@@ -11,7 +11,7 @@ public class User {
     /**
      * 用户id
      */
-    private String id;
+    private int id;
 
     /**
      * 用户登录名称
@@ -69,11 +69,11 @@ public class User {
         this.loginName = loginName;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

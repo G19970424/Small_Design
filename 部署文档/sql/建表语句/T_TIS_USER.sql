@@ -1,6 +1,6 @@
 drop table t_tis_user;
 create table t_tis_user(
-    f_id VARCHAR(64) NOT NULL COMMENT '用户id',
+    f_id int NOT NULL AUTO_INCREMENT COMMENT '用户id',
     f_user_name VARCHAR(64) NOT NULL COMMENT '昵称',
     f_login_user_name VARCHAR(64) NOT NULL COMMENT '用户登录名称',
     f_password VARCHAR(64) NOT NULL COMMENT '密码',

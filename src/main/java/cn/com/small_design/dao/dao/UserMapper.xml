@@ -5,7 +5,7 @@
 <mapper namespace="cn.com.small_design.dao.dao.UserMapper">
 
     <resultMap id="BaseResultMap" type="cn.com.small_design.dao.dao.pojo.User">
-        <id property="id" column="F_ID" jdbcType="VARCHAR"/>
+        <id property="id" column="F_ID" jdbcType="INTEGER"/>
         <result property="loginName" column="F_LOGIN_USER_NAME" jdbcType="VARCHAR"/>
         <result property="username" column="F_USER_NAME" jdbcType="VARCHAR"/>
         <result property="password" column="F_PASSWORD" jdbcType="VARCHAR"/>

@@ -59,7 +59,7 @@ public class LoginServiceImpl implements ILoginService {
         //获取用户信息
         UserInfo userInfo = (UserInfo) authenticate.getPrincipal();
 
-        String id = userInfo.getUser().getId();
+        int id = userInfo.getUser().getId();
 
         //用户认证通过，生成返回前端的jwt信息，用于进行用户信息权限验证
         String jwt = JwtUtil.createJwt("userId", id);

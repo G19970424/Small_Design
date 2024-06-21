@@ -40,7 +40,7 @@ public class JwtUtil {
         return token;
     }
 
-    public static String createJwt(String object,String userId){
+    public static String createJwt(String object,int userId){
         JwtBuilder jwtBuilder = getJwtBuilder(object, getUUID(), userId);
         return jwtBuilder.compact();
     }
@@ -62,7 +62,7 @@ public class JwtUtil {
      * @param userId
      * @return
      */
-    private static JwtBuilder getJwtBuilder(String subject, String uuid, String userId) {
+    private static JwtBuilder getJwtBuilder(String subject, String uuid, int userId) {
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         SecretKey secretKey = generalKey();
         long nowMillis = System.currentTimeMillis();
