@@ -34,7 +34,11 @@ public class RegisterController {
     @PostMapping("/register")
     public RestResponse register(@RequestBody RegisterDto registerDto){
         RestResponse res;
-        registerService.register(registerDto);
+        try {
+            registerService.register(registerDto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         res = ResultApi.ok("用户注册成功");
         return res;
     }

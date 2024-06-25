@@ -2,15 +2,15 @@
   <div class="container animated bounceInLeft">
     <div class="box">
       <div class="boxChi">
-        <el-form label-width="80px" ref="formRef" :rules="rules" :model="formlabelAlign">
+        <el-form label-width="80px" ref="formRef" :rules="rules" :model="formLabelAlign">
           <el-form-item label="账号" prop="username">
             <el-input v-model="formLabelAlign.username"></el-input>
           </el-form-item>
           <el-form-item prop="password" label="密码">
-            <el-input v-model="formlabelAlign.password"></el-input>
+            <el-input v-model="formLabelAlign.password"></el-input>
           </el-form-item>
           <el-form-item prop="code" label="验证码">
-            <el-input class="codeInput" v-model="formlabelAlign.code"></el-input>
+            <el-input class="codeInput" v-model="formLabelAlign.code"></el-input>
             <span @click="getCaptchaCode" class="codeSpan" v-html="code"></span>
           </el-form-item>
         </el-form>
@@ -21,39 +21,39 @@
 </template>
 
 <script>
-import { userRouter , useRole } from "vue-router";
+//import { userRouter , useRole } from "vue-router";
 import axios from "/src/assets/js/axios";
 import{ ElMessage } from "element-plus";
 import{ reactive, ref, onMounted} from "vue";
 
 export default {
   setup(props){
-    let router = useRouter();
+    //let router = useRouter();
     const validateUsername = (rule,value,callback) => {
-      if(value ===""){
+      if(value === ""){
         callback(new Error("请输入姓名"));
       }else {
         callback();
       }
     };
     const validatePassword = (rule,value,callback) => {
-      if(value ===""){
+      if(value === ""){
         callback(new Error("请输入密码"));
       }else {
         callback();
       }
     };
     const validateCode = (rule,value,callback) => {
-      if(value ===""){
+      if(value === ""){
         callback(new Error("请输入验证码"));
       }else {
         callback();
       }
     };
     const formLabelAlign = reactive({
-      username:"",
-      password:"",
-      code:""
+      username : "",
+      password : "",
+      code : ""
     });
     let formRef = ref(null);
     let code = ref(null);
@@ -63,28 +63,30 @@ export default {
     });
 
     const getCaptchaCode = () => {
-      axios.get("getCaptchaCode").then(res => {
-        res.code === "200" && (code.value = res.data.code);
-        ElMessage.success({
-          message: "验证码获取成功",
-          type: "success"
-        });
-        localStorage.setItem("token", res.data.token);
+      axios.get("/captcha").then(res => {
+        console.log(res);
+        // res.code === "200" && (code.value = res.data.code);
+        // ElMessage.success({
+        //   message: "验证码获取成功",
+        //   type: "success"
+        // });
+        //localStorage.setItem("token", res.data.token);
       });
     };
     const loginFun= () => {
       formRef.value.validate(valid =>{
         if(valid) {
-          axios.get("login", formLabelAlign).then(res => {
-            res.code === "200" && localStorage.setItem("token", res.data.token);
-            ElMessage.success({
-              message: res.data.data,
-              type: "success"
-            });
-            if (res.data.code == 1) {
-              localStorage.setItem("username", formLabelAlign.username);
-              router.push("/");
-            }
+          axios.post("/login", formLabelAlign).then(res => {
+            console.log(res);
+            //res.code === "200" && localStorage.setItem("token", res.data.token);
+            // ElMessage.success({
+            //   message: res.data.data,
+            //   type: "success"
+            // });
+            // if (res.data.code == 1) {
+            //   localStorage.setItem("username", formLabelAlign.username);
+            //   router.push("/");
+            // }
           });
         }else {
           alert("请填写必填信息");

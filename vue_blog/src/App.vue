@@ -1,7 +1,7 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <header>
-    <router-link to="/">Home</router-link>
+    <router-link to="/home">Home</router-link>
     <router-link to="/login">login</router-link>
 
   </header>

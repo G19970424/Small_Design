@@ -11,11 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * @author gejj
@@ -40,7 +39,7 @@ public class UserManagerServiceImpl implements IUserManagerService {
      * @return
      */
     @Override
-    public List<User> query() {
+    public List<User> query () {
         return userMapper.queryAll();
     }
 
@@ -49,7 +48,7 @@ public class UserManagerServiceImpl implements IUserManagerService {
      * @param dto
      */
     @Override
-    public void insert(UserManagerDto dto) {
+    public void insert(UserManagerDto dto) throws Exception{
         //查询登录名是否重复
         User user = userMapper.queryUserByUsername(dto.getLoginName());
         if(!Objects.isNull(user)){
@@ -64,7 +63,7 @@ public class UserManagerServiceImpl implements IUserManagerService {
      * @param dto
      */
     @Override
-    public void update(UserManagerDto dto) {
+    public void update(UserManagerDto dto) throws Exception{
         //查询登录名是否重复
         User user = userMapper.queryUserByUsername(dto.getLoginName());
         if(!Objects.isNull(user)){
@@ -85,7 +84,6 @@ public class UserManagerServiceImpl implements IUserManagerService {
 
     private User conversion(UserManagerDto dto){
         User user = new User();
-        user.setId(UUID.randomUUID().toString().replaceAll("-",""));
         user.setUsername(dto.getUsername());
         user.setPassword(bCryptPasswordUtil.bcryptPassword(dto.getPassword()));
         user.setLoginName(dto.getLoginName());

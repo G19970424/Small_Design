@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -39,7 +39,7 @@ public class RegisterServiceImpl implements IRegisterService {
     private PasswordEncoder encoder;
 
     @Override
-    public RestResponse<?> register(RegisterDto registerDto) {
+    public RestResponse<?> register(RegisterDto registerDto) throws Exception{
         //验证用户信息是否存在
         User user = UserMapper.queryUserByUsername(registerDto.getUsername());
 
@@ -59,7 +59,6 @@ public class RegisterServiceImpl implements IRegisterService {
 
     private User conversion(String id,RegisterDto registerDto){
         User user = new User();
-        user.setId(id);
         user.setUsername(registerDto.getUsername());
         user.setLoginName(registerDto.getUsername());
         user.setPassword(registerDto.getPassword());

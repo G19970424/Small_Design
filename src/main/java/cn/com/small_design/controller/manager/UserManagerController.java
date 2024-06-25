@@ -38,7 +38,11 @@ public class UserManagerController {
      */
     @PostMapping("/userManager/insert")
     public RestResponse insert(@RequestBody UserManagerDto dto){
-        userManagerService.insert(dto);
+        try {
+            userManagerService.insert(dto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return ResultApi.ok("新增成功");
     }
 
@@ -49,7 +53,11 @@ public class UserManagerController {
      */
     @PostMapping("/userManager/update")
     public RestResponse update(@RequestBody UserManagerDto dto){
-        userManagerService.update(dto);
+        try {
+            userManagerService.update(dto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return ResultApi.ok("更新成功");
     }
 

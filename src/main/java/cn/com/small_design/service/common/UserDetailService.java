@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -37,7 +38,12 @@ public class UserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) {
         //用户信息查询
-        User user = UserMapper.queryUserByUsername(s);
+        User user = null;
+        try {
+            user = UserMapper.queryUserByUsername(s);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         //判断用户是否存在
         if(Objects.isNull(user)){

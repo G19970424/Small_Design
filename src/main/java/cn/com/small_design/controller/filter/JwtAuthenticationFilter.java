@@ -45,11 +45,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             chain.doFilter(request,response);
             return;
         }
-
-        String userId;
+        int userId;
         try {
             Claims claims = JwtUtil.parseJWT(token);
-            userId = claims.get("userId",String.class);
+            userId = (int) claims.get("userId");
         } catch (Exception e) {
             //token解析超时、非法
             throw new BusinessException(GlobalExceptionEnums.TOKEN_PARSING_EXCEPTION);

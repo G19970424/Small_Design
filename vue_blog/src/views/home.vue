@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a>aaaaaaaaaaaaa</a>
+    <a>大傻子</a>
   </div>
 </template>
 

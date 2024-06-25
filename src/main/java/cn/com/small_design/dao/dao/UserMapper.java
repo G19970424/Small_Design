@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public interface UserMapper {
      * @param username
      * @return
      */
-    User queryUserByUsername(@Param("username")String username);
+    User queryUserByUsername(@Param("username")String username) throws SQLException;
 
     /**
      * 添加用户

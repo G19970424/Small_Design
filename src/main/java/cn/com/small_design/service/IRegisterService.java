@@ -10,5 +10,5 @@ import cn.com.small_design.controller.base.dto.RegisterDto;
  */
 public interface IRegisterService {
 
-    RestResponse<?> register(RegisterDto registerDto);
+    RestResponse<?> register(RegisterDto registerDto) throws Exception;
 }
