@@ -31,7 +31,7 @@ public class LoginController {
      * @return
      */
     @PostMapping("/login")
-    public RestResponse login(@RequestBody UserDto userDto){
+    public RestResponse<?> login(@RequestBody UserDto userDto){
         return ResultApi.ok(loginService.login(userDto));
     }
 }

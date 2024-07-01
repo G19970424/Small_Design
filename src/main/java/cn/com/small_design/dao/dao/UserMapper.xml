@@ -56,33 +56,37 @@
 
     <update id="update" parameterType="cn.com.small_design.dao.dao.pojo.User">
         update
-        t_tis_user t
+        t_tis_user
         <set>
             <if test="loginName != null and loginName != '' ">
-                t.F_LOGIN_USER_NAME = #{loginName,jdbcType=VARCHAR}
+                F_LOGIN_USER_NAME = #{loginName,jdbcType=VARCHAR}
             </if>
             <if test="username != null and username != '' ">
-                t.F_USER_NAME = #{username,jdbcType=VARCHAR}
+                F_USER_NAME = #{username,jdbcType=VARCHAR}
             </if>
             <if test="password != null and password != '' ">
-                t.F_PASSWORD = #{password,jdbcType=VARCHAR}
+                F_PASSWORD = #{password,jdbcType=VARCHAR}
             </if>
             <if test="sex != null and sex != '' ">
-                t.F_SEX = #{sex,jdbcType=CHAR}
+                F_SEX = #{sex,jdbcType=CHAR}
             </if>
             <if test="age != null and age != '' ">
-                t.F_AGE = #{age,jdbcType=TINYINT}
+                F_AGE = #{age,jdbcType=TINYINT}
             </if>
             <if test="email != null and email != '' ">
-                t.F_EMAIL = #{email,jdbcType=VARCHAR}
+                F_EMAIL = #{email,jdbcType=VARCHAR}
             </if>
             <if test="phoneNumber != null and phoneNumber != '' ">
-                t.F_PHONE_NUMBER = #{phoneNumber,jdbcType=VARCHAR}
+                F_PHONE_NUMBER = #{phoneNumber,jdbcType=VARCHAR}
             </if>
             <if test="userType != null and userType != '' ">
-                t.F_USER_TYPE = #{userType,jdbcType=CHAR}
+                F_USER_TYPE = #{userType,jdbcType=CHAR}
             </if>
         </set>
-        where t.F_ID = #{id,jdbcType=VARCHAR}
+        where F_ID = #{id,jdbcType=VARCHAR}
     </update>
+
+    <delete id="delete" >
+        delete t_tis_user where F_ID = #{id,jdbcType=VARCHAR}
+    </delete>
 </mapper>

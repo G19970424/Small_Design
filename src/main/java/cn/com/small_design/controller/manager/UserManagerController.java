@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * 用户管理接口
  */
-@RestController
+@RestController("/userManager")
 public class UserManagerController {
 
     @Autowired
@@ -26,8 +26,8 @@ public class UserManagerController {
      * 查询所有用户
      * @return
      */
-    @PostMapping("/userManager/queryAll")
-    public RestResponse queryAll(){
+    @PostMapping("/queryAll")
+    public RestResponse<?> queryAll(){
         return ResultApi.ok(userManagerService.query());
     }
 
@@ -36,13 +36,9 @@ public class UserManagerController {
      * @param dto
      * @return
      */
-    @PostMapping("/userManager/insert")
-    public RestResponse insert(@RequestBody UserManagerDto dto){
-        try {
-            userManagerService.insert(dto);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @PostMapping("/insert")
+    public RestResponse<?> insert(@RequestBody UserManagerDto dto){
+        userManagerService.insert(dto);
         return ResultApi.ok("新增成功");
     }
 
@@ -52,12 +48,8 @@ public class UserManagerController {
      * @return
      */
     @PostMapping("/userManager/update")
-    public RestResponse update(@RequestBody UserManagerDto dto){
-        try {
-            userManagerService.update(dto);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public RestResponse<?> update(@RequestBody UserManagerDto dto){
+        userManagerService.update(dto);
         return ResultApi.ok("更新成功");
     }
 
@@ -67,7 +59,7 @@ public class UserManagerController {
      * @return
      */
     @PostMapping("/userManager/delete")
-    public RestResponse delete(@RequestBody String id){
+    public RestResponse<?> delete(@RequestBody String id){
         userManagerService.delete(id);
         return ResultApi.ok("删除成功");
     }

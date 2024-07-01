@@ -22,7 +22,8 @@ public interface UserMapper {
      * @param username
      * @return
      */
-    User queryUserByUsername(@Param("username")String username) throws SQLException;
+    User queryUserByUsername(@Param("username")String username);
+
 
     /**
      * 添加用户
@@ -41,4 +42,10 @@ public interface UserMapper {
      * @param user
      */
     void update(@Param("user")User user);
+
+    /**
+     * 删除用户
+     * @param id
+     */
+    void delete(String id);
 }

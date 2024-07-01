@@ -24,10 +24,6 @@ import java.util.Objects;
 @Service
 @Transactional
 public class UserManagerServiceImpl implements IUserManagerService {
-    /**
-     * 日志器
-     */
-    private static final Logger logger = LoggerFactory.getLogger(UserManagerServiceImpl.class);
 
     @Autowired
     private UserMapper userMapper;
@@ -48,7 +44,7 @@ public class UserManagerServiceImpl implements IUserManagerService {
      * @param dto
      */
     @Override
-    public void insert(UserManagerDto dto) throws Exception{
+    public void insert(UserManagerDto dto){
         //查询登录名是否重复
         User user = userMapper.queryUserByUsername(dto.getLoginName());
         if(!Objects.isNull(user)){
@@ -63,7 +59,7 @@ public class UserManagerServiceImpl implements IUserManagerService {
      * @param dto
      */
     @Override
-    public void update(UserManagerDto dto) throws Exception{
+    public void update(UserManagerDto dto){
         //查询登录名是否重复
         User user = userMapper.queryUserByUsername(dto.getLoginName());
         if(!Objects.isNull(user)){
@@ -79,7 +75,7 @@ public class UserManagerServiceImpl implements IUserManagerService {
      */
     @Override
     public void delete(String id) {
-
+        userMapper.delete(id);
     }
 
     private User conversion(UserManagerDto dto){

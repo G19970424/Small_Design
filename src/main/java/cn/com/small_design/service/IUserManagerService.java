@@ -13,9 +13,9 @@ import java.util.List;
 public interface IUserManagerService {
     List<User> query();
 
-    void insert(UserManagerDto dto) throws Exception;
+    void insert(UserManagerDto dto);
 
-    void update(UserManagerDto dto) throws Exception;
+    void update(UserManagerDto dto);
 
     void delete(String id);
 }

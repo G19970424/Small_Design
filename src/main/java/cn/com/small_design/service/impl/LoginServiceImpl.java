@@ -27,29 +27,26 @@ import java.util.Objects;
 @Transactional
 public class LoginServiceImpl implements ILoginService {
 
-    /**
-     * 日志器
-     */
-    private static final Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
-
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
     private RedisUtil redisUtils;
 
     private final String CAPTCHA_KEY = "captcha:verification:";
+
     @Override
     public String login(UserDto userDto) {
-        UsernamePasswordAuthenticationToken up = new UsernamePasswordAuthenticationToken(userDto.getUsername(),userDto.getPassword());
-        Authentication authenticate = authenticationManager.authenticate(up);
-
         //获取验证码
         Object captcha = redisUtils.getCacheObject(CAPTCHA_KEY+userDto.getCaptchaKey());
 
-        //用户认证校验
+        //验证码校验
         if(Objects.isNull(captcha) || !userDto.getCaptcha().equals(captcha)){
             throw new BusinessException(GlobalExceptionEnums.CAPTCHA_ERROR);
         }
+
+        //用户认证
+        UsernamePasswordAuthenticationToken up = new UsernamePasswordAuthenticationToken(userDto.getUsername(),userDto.getPassword());
+        Authentication authenticate = authenticationManager.authenticate(up);
 
         //用户认证失败
         if(Objects.isNull(authenticate)){
@@ -63,7 +60,6 @@ public class LoginServiceImpl implements ILoginService {
 
         //用户认证通过，生成返回前端的jwt信息，用于进行用户信息权限验证
         String jwt = JwtUtil.createJwt("userId", id);
-
         //将用户信息缓存到redis中
         redisUtils.setCacheObject("login:"+id,userInfo);
         return jwt;

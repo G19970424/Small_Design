@@ -4,8 +4,6 @@ import cn.com.small_design.common.response.RestResponse;
 import cn.com.small_design.common.response.ResultApi;
 import cn.com.small_design.controller.base.dto.RegisterDto;
 import cn.com.small_design.service.IRegisterService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,8 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RegisterController {
 
-    private static final Logger logger = LoggerFactory.getLogger(RegisterController.class);
-
     @Autowired
     private IRegisterService registerService;
 
@@ -32,14 +28,8 @@ public class RegisterController {
      * @return
      */
     @PostMapping("/register")
-    public RestResponse register(@RequestBody RegisterDto registerDto){
-        RestResponse res;
-        try {
-            registerService.register(registerDto);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        res = ResultApi.ok("用户注册成功");
-        return res;
+    public RestResponse<?> register(@RequestBody RegisterDto registerDto){
+        registerService.register(registerDto);
+        return ResultApi.ok("用户注册成功");
     }
 }
