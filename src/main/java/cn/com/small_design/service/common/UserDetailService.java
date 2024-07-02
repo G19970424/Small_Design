@@ -61,12 +61,6 @@ public class UserDetailService implements UserDetailsService {
         //用户权限信息查询
         List<GrantedAuthority> authorities = new ArrayList<>();
         List<Permission> permissions = permissionMapper.queryByUser(user.getId());
-//        //方法一：使用用户、角色、资源建立关系，直接使用角色控制权限
-//        List<String> codeList = roleMapper.queryUserRole(user.getUsername());
-//        //添加权限信息进入缓存
-//        redisUtils.set(username, StringUtils.join(codeList,","),60 * 60);
-//        //方法二：添加权限（资源表），通过建立用户、角色、权限、资源之间的关系，使用"权限"实现按钮级别的权限控制
-//        List<String> codeList = authoritiesMapper.queryAuthoritiesList(user.getUsername());
         permissions.forEach(code ->{
             GrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(code.getCode());
             authorities.add(simpleGrantedAuthority);

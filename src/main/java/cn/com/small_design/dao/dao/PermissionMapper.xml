@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.small_design.dao.dao.PermissionMapper">
+
+    <resultMap id="BaseResultMap" type="cn.com.small_design.dao.dao.pojo.Permission">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="permission_code" column="code" jdbcType="VARCHAR"/>
+        <result property="permission_name" column="name" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="baseColumn">
+        id,permission_code,permission_name
+    </sql>
+    <select id="queryByUser" >
+           select <include refid="baseColumn"/>
+            from t_tis_permission
+        where id = #{id}
+    </select>
+</mapper>
