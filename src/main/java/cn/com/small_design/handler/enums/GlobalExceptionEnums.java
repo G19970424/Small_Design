@@ -17,6 +17,7 @@ public enum GlobalExceptionEnums {
     RC405("405","方法不被允许执行"),
 
     /** 用户登录相关异常 */
+    NOT_NULL_USERNAME("2000","用户名或密码不能为空"),
     INCORRECT_USERNAME_OR_PASSWORD("2001","用户名或密码错误"),
     REPEAT_OF_USERNAME("2002","用户名重复，请重新输入"),
     USER_LOGIN_TIMEOUT("2003","用户登录过期，请重新登录"),
